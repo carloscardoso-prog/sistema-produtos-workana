@@ -18,8 +18,8 @@ function iniciaFluxoCodigo()
             $dadosForm = $_POST['dados']['formData'];
         }
 
-        if (isset($_POST[])) {
-        }
+        // if (isset($_POST[])) {
+        // }
 
         $arquivo = $_POST['dados']['arquivo'];
         $funcao = $_POST['dados']['funcao'];
