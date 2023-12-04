@@ -151,7 +151,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/view/form/venda.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/form/venda.php">
                   <svg class="bi">
                     <use xlink:href="#file-earmark" />
                   </svg>
@@ -159,7 +159,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/view/form/produto.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/form/produto.php">
                   <svg class="bi">
                     <use xlink:href="#cart" />
                   </svg>
@@ -167,7 +167,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/view/form/tipo-produto.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/form/tipo-produto.php">
                   <svg class="bi">
                     <use xlink:href="#people" />
                   </svg>
@@ -180,7 +180,7 @@
 
             <ul class="nav flex-column mb-auto">
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/view/form/login.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/form/login.php">
                   <svg class="bi">
                     <use xlink:href="#door-closed" />
                   </svg>
@@ -213,7 +213,7 @@
                 <td>R$ 50,00</td>
                 <td>R$ 49,99</td>
                 <td>
-                  <a class="btn btn-primary venda-listar" id="1-venda-listar" href="dados-venda.php/?id-venda=1" role="button">
+                  <a class="btn btn-primary venda-listar" id="1-venda-listar" href="/venda/dados-venda/?id_venda=1" role="button">
                     <i class="bi bi-grid-3x3-gap-fill"></i>
                   </a>
                 </td>

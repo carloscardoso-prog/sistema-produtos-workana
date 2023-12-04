@@ -5,14 +5,10 @@ define("DB_USER", "");
 define("DB_PASSWORD", "");
 define("DB_NAME", "master");
 define("DB_DRIVER", "sqlsrv");
-
+// Changing to POSTGRESQL in which its easier to maintain
 class Conexao
 {
     private static $connection;
-
-    private function __construct()
-    {
-    }
 
     public static function getConnection()
     {
