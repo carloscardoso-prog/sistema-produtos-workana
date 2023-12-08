@@ -10,14 +10,13 @@ function iniciaFluxoCodigo()
 
         switch ($_POST['acao']) {
             case 'busca-dados-produto':
-                $dadosProduto = ProdutoController::buscar([
-                    'select' => 'PRODUTO.produto_nome AS Produto, PRODUTO_TIPO.produto_imposto AS Imposto',
-                    'from' => 'PRODUTO',
-                    'joins' => 'INNER JOIN PRODUTO_TIPO ON PRODUTO_TIPO.id = PRODUTO.produto_tipo_id',
-                    'where' => 'PRODUTO.produto_nome = ' . "'". $_POST['dados']['nomeProduto'] . "'"
-                ]);
-                
-                return $dadosProduto;
+                $dadosProduto = ProdutoController::buscarProdutoPorNome(['nome_produto' => $_POST['dados']['nomeProduto']]);
+                $contador = $_POST['dados']['contador'];
+
+                require_once __DIR__ . '/produto-listagem-cadastro.php';
+                break;
+            case 'cadastrar-venda':
+                VendaController::venda_cadastrar(['dados_venda' => $_POST['dados']]);
                 break;
             default:
                 break;

@@ -8,25 +8,23 @@ class UsuarioController extends Usuario
         require_once __DIR__ . '/../views/index.php';
     }
 
-    public static function usuario_listar(array $data)
+    public static function buscarUsuarioIdPorUsuario(array $data)
     {
+        $retorno = [];
+
         if (!empty($data)) {
-            $vendaLista = self::buscar([
-                'select' => 'VENDA.id AS protocolo, VENDA.cliente_nome, USUARIO.usuario, PRODUTO.produto_nome, PRODUTO_TIPO.produto_valor, PRODUTO_TIPO.produto_imposto',
-                'from' => 'VENDA',
-                'joins' => '
-                INNER JOIN VENDA_PRODUTO ON VENDA_PRODUTO.venda_id = VENDA.id
-                INNER JOIN PRODUTO ON PRODUTO.id = VENDA_PRODUTO.produto_id
-                INNER JOIN PRODUTO_TIPO ON PRODUTO_TIPO.id = PRODUTO.produto_tipo_id
-                INNER JOIN USUARIO ON VENDA.usuario_id = USUARIO.id
-                ',
-                'where' => 'VENDA.id = ' . $data['id_venda']
+            $retorno = self::buscar([
+                'select' => 'USUARIO.id',
+                'from' => 'USUARIO',
+                'where' => 'USUARIO.usuario = ' . "'" . $data['usuario'] . "'"
             ]);
+
+            if(!empty($retorno)){
+                $retorno = $retorno[0];
+            }
         }
 
-        if (!empty($vendaLista)) {
-            return $vendaLista;
-        }
+        return $retorno;
     }
 
     public static function usuario_cadastrar(array $data)

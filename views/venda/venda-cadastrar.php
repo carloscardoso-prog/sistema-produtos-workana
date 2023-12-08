@@ -1,9 +1,3 @@
-<?php
-
-echo '<pre>';
-print_r($produtoDados);
-echo '</pre>';
-?>
 <html lang="en" data-bs-theme="auto">
 
 <head>
@@ -118,33 +112,25 @@ echo '</pre>';
       </div>
 
       <form class="needs-validation" id="venda" novalidate>
-        <input type="hidden" class="form-control" id="usuario" name="usuario_id" value="NomeUsuario" required>
+        <input type="hidden" class="form-control" id="usuario" name="usuario_id" value="usuario1" required>
+        <input type="hidden" data-contador="0" id="contador">
         <div class="row g-5">
           <div class="col-md-5 col-lg-4 order-md-last produtos-lista">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
               <span class="text-primary">Produtos:</span>
             </h4>
             <ul class="list-group mb-3">
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div id="produto-bacana">
-                  <h6 class="my-0">Produto Bacana</h6>
-                  <a class="btn btn-primary btn-sm adiciona-produto" id="adiciona-produto-bacana"><i>+1</i></a>
-                  <a class="btn btn-primary btn-sm remove-produto" id="remove-produto-bacana"><i>-1</i></a>
-                  <span id="exibe-quantidade-produto-bacana">1</span>
-                </div>
-                <input type="hidden" name="produto[produto-bacana]" class="valor-form-produto-bacana" id="quantidade-produto-bacana" value="1">
-                <span class="text-body-secondary produto-bacana" id="produto-bacana-valor-multiplicado">R$ 12.00</span>
-                <span class="d-none text-body-secondary" id="produto-bacana-valor-unico">12.00</span>
-              </li>
+              <div class="produtos-listagem-cadastro">
+              </div>
               <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
                 <div class="text-success">
                   <h6 class="my-0">Valor Imposto</h6>
                 </div>
-                <span class="text-success" id="imposto">+R$ 0,00</span>
+                <span class="text-success" id="imposto">+R$ 0.00</span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total:</span>
-                <strong id="valor-final">R$ 20,00</strong>
+                <strong id="valor-final">R$ 0.00</strong>
               </li>
             </ul>
 

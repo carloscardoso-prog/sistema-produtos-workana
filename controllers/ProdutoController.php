@@ -3,37 +3,6 @@
 require_once  __DIR__ . '/../models/Produto.php';
 class ProdutoController extends Produto
 {
-
-    public static function produto_listar(array $data)
-    {
-        if (!empty($data)) {
-            $produtosLista = self::buscar([
-                'select' => 'PRODUTO.produto_nome, PRODUTO.id',
-                'from' => 'PRODUTO',
-                'where' => 'PRODUTO.id = ' . $data['id_objeto']
-            ]);
-
-            if (!empty($produtosLista)) {
-                return $produtosLista;
-            }
-        }
-    }
-
-    public static function produto_listar_todos(array $data)
-    {
-        if (!empty($data)) {
-            $produtosLista = self::buscar([
-                'select' => 'PRODUTO.produto_nome, PRODUTO.id',
-                'from' => 'PRODUTO',
-                'where' => 'PRODUTO.id != 0'
-            ]);
-
-            if (!empty($produtosLista)) {
-                return $produtosLista;
-            }
-        }
-    }
-
     public static function produto_buscar(array $data){
         $produtosLista = self::buscar([
             'select' => 'PRODUTO.produto_nome, PRODUTO.id, PRODUTO_TIPO.produto_produto_imposto , PRODUTO_TIPO.produto_valor',
@@ -69,5 +38,20 @@ class ProdutoController extends Produto
         } else {
             require_once __DIR__ . '/../views/produto/produto-cadastrar.php';
         }
+    }
+
+    public static function buscarProdutoPorNome(array $data){
+        $retorno = [];
+        
+        if(!empty($data['nome_produto'])){
+            $retorno = self::buscar([
+                'select' => 'PRODUTO.produto_nome AS Produto, PRODUTO_TIPO.produto_valor AS Valor, PRODUTO_TIPO.produto_imposto AS Imposto',
+                'from' => 'PRODUTO',
+                'joins' => 'INNER JOIN PRODUTO_TIPO ON PRODUTO_TIPO.id = PRODUTO.produto_tipo_id',
+                'where' => 'PRODUTO.produto_nome = ' . "'". $data['nome_produto'] . "'"
+            ]);
+        }
+
+        return $retorno;
     }
 }

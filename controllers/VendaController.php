@@ -1,7 +1,8 @@
 <?php
 
 require_once  __DIR__ . '/../models/Venda.php';
-require_once  __DIR__ . '/../models/Produto.php';
+require_once  __DIR__ . '/../controllers/ProdutoController.php';
+require_once  __DIR__ . '/../controllers/UsuarioController.php';
 class VendaController extends Venda
 {
     public function index()
@@ -51,18 +52,22 @@ class VendaController extends Venda
     public static function venda_cadastrar(array $data)
     {
         if (!empty($data)) {
-
-            print_r($data);
-            parse_str($data['dadosForm'], $arrayResultado);
-            die;
-            foreach ($data['dadosForm'] as $chaveDado => $dadoInserir) {
-            }
-
+            $data['dados_venda'] = self::reorganizaDadosCadastroVenda(['dadosPost' => $data['dados_venda']]);
+            $data['dados_venda']['usuario_id'] = UsuarioController::buscarUsuarioIdPorUsuario(['usuario' => $data['dados_venda']['usuario_id']]);
+            
             $vendaCadastro = self::inserir([
                 'insert' => 'VENDA',
-                'columns' => 'cliente_nome, venda_data, usuario_id'
-                // 'values' =>
+                'columns' => '(cliente_nome, venda_data, usuario_id)',
+                'values' => "('" . $data['dados_venda']['cliente_nome'] . "', '" . date('Y-m-d') . "', '" . $data['dados_venda']['usuario_id']['id'] . "')"
             ]);
+
+            foreach ($data['dados_venda'] as $chaveDado => $dadoInserir) {
+                echo '<pre>';
+                print_r($data);
+                die;
+                parse_str($data['dados_venda'], $arrayResultado);
+                die;
+            }
         } else {
 
             $produtoDados = Produto::buscar([
@@ -75,4 +80,37 @@ class VendaController extends Venda
             require_once __DIR__ . '/../views/venda/venda-cadastrar.php';
         }
     }
+
+    public static function reorganizaDadosCadastroVenda(array $data) {
+        $dadosInsert = [];
+        $produtoIndex = 0;
+        $dadosProduto = [];
+        
+        $postArray = $data['dadosPost']['dadosVenda'];
+    
+        foreach ($postArray as $item) {
+            $name = $item['name'];
+            $value = $item['value'];
+    
+            if (strpos($name, 'usuario_id') !== false || strpos($name, 'cliente_nome') !== false) {
+                $dadosInsert[$name] = $value;
+            } elseif (strpos($name, 'produtos') !== false) {
+                if ($name === "produtos[produto-$produtoIndex][nome]") {
+                    $produtoIndex++;
+                    if (!empty($dadosProduto)) {
+                        $dadosInsert['produtos'][] = $dadosProduto;
+                    }
+                    $dadosProduto = [];
+                }
+                $dadosProduto[substr($name, strpos($name, '[') + 1, -1)] = $value;
+            }
+        }
+    
+        if (!empty($dadosProduto)) {
+            $dadosInsert['produtos'][] = $dadosProduto;
+        }
+    
+        return $dadosInsert;
+    }
+    
 }

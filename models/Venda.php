@@ -33,7 +33,7 @@ class Venda extends Conexao
         $resultadoQuery = "";
 
         if (!empty($dadosQuery)) {
-            $resultadoQuery = self::executarQuery(["INSERT INTO " . $dadosQuery['insert'] . $dadosQuery['columns'] . " VALUES " . $dadosQuery['values'] . ";"]);
+            $resultadoQuery = self::executarQuery(['query' => "INSERT INTO " . $dadosQuery['insert'] . $dadosQuery['columns'] . " VALUES " . $dadosQuery['values'] . ";"]);
         }
 
         return $resultadoQuery;
@@ -45,7 +45,7 @@ class Venda extends Conexao
         $resultadoQuery = "";
 
         if (!empty($dadosQuery)) {
-            $resultadoQuery = self::executarQuery(["DELETE FROM " . $dadosQuery['from'] . " WHERE " . $dadosQuery['where'] . ";"]);
+            $resultadoQuery = self::executarQuery(['query' => "DELETE FROM " . $dadosQuery['from'] . " WHERE " . $dadosQuery['where'] . ";"]);
         }
 
         return $resultadoQuery;
@@ -57,7 +57,7 @@ class Venda extends Conexao
         $resultadoQuery = "";
 
         if (!empty($dadosQuery)) {
-            $resultadoQuery = self::executarQuery(["UPDATE " . $dadosQuery['update'] . " SET " . $dadosQuery['set'] . " WHERE " . $dadosQuery['where'] . ";"]);
+            $resultadoQuery = self::executarQuery(['query' => "UPDATE " . $dadosQuery['update'] . " SET " . $dadosQuery['set'] . " WHERE " . $dadosQuery['where'] . ";"]);
         }
 
         return $resultadoQuery;
