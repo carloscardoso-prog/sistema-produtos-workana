@@ -59,26 +59,4 @@ $(document).ready(function () {
       console.log(resultado);
     });
   });
-
-  $(document).on('click', '.adiciona-produto', function () {
-    let valorBotao = $(this).closest('div').attr('id');
-    let quantidadeProduto = $('#exibe-quantidade-' + valorBotao).text();
-
-    $('#exibe-quantidade-' + valorBotao).text(parseInt(quantidadeProduto) + 1);
-
-    let valorForm = $('.valor-form-' + valorBotao).val();
-    $('.valor-form-' + valorBotao).val(parseInt(valorForm) + 1);
-  });
-
-  $(document).on('click', '.remove-produto', function () {
-    let valorBotao = $(this).closest('div').attr('id');
-    let quantidadeProduto = $('#exibe-quantidade-' + valorBotao).text();
-
-    if (quantidadeProduto > 0) {
-      $('#exibe-quantidade-' + valorBotao).text(parseInt(quantidadeProduto) - 1);
-
-      let valorForm = $('.valor-form-' + valorBotao).val();
-      $('.valor-form-' + valorBotao).val(parseInt(valorForm) - 1);
-    }
-  });
 });

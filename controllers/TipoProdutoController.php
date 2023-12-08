@@ -1,10 +1,10 @@
 <?php
 
-require_once  __DIR__ . '/../models/Produto.php';
-class ProdutoController extends Produto
+require_once  __DIR__ . '/../models/TipoProduto.php';
+class TipoProdutoController extends TipoProduto
 {
 
-    public static function produto_listar(array $data)
+    public static function tipo_produto_listar(array $data)
     {
         if (!empty($data)) {
             $produtosLista = self::buscar([
@@ -19,7 +19,7 @@ class ProdutoController extends Produto
         }
     }
 
-    public static function produto_listar_todos(array $data)
+    public static function tipo_produto_listar_todos(array $data)
     {
         if (!empty($data)) {
             $produtosLista = self::buscar([
@@ -34,7 +34,7 @@ class ProdutoController extends Produto
         }
     }
 
-    public static function produto_buscar(array $data){
+    public static function tipo_produto_buscar(array $data){
         $produtosLista = self::buscar([
             'select' => 'PRODUTO.produto_nome, PRODUTO.id, PRODUTO_TIPO.produto_produto_imposto , PRODUTO_TIPO.produto_valor',
             'from' => 'PRODUTO',
@@ -51,7 +51,7 @@ class ProdutoController extends Produto
         }
     }
 
-    public static function produto_cadastrar(array $data)
+    public static function tipo_produto_cadastrar(array $data)
     {
         if (!empty($data)) {
 
@@ -67,7 +67,7 @@ class ProdutoController extends Produto
                 // 'values' =>
             ]);
         } else {
-            require_once __DIR__ . '/../views/produto/produto-cadastrar.php';
+            require_once __DIR__ . '/../views/tipo-produto/tipo-produto-cadastrar.php';
         }
     }
 }

@@ -143,7 +143,7 @@
           <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/">
                   <svg class="bi">
                     <use xlink:href="#house-fill" />
                   </svg>
@@ -151,7 +151,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/form/venda.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/venda/venda-cadastrar">
                   <svg class="bi">
                     <use xlink:href="#file-earmark" />
                   </svg>
@@ -159,7 +159,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/form/produto.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/produto/produto-cadastrar">
                   <svg class="bi">
                     <use xlink:href="#cart" />
                   </svg>
@@ -167,7 +167,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/form/tipo-produto.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/tipoProduto/tipo-produto-cadastrar">
                   <svg class="bi">
                     <use xlink:href="#people" />
                   </svg>
@@ -180,7 +180,7 @@
 
             <ul class="nav flex-column mb-auto">
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="/form/login.php">
+                <a class="nav-link d-flex align-items-center gap-2" href="/usuario/usuario-login">
                   <svg class="bi">
                     <use xlink:href="#door-closed" />
                   </svg>
@@ -195,7 +195,7 @@
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
         <h2>Lista de Vendas</h2>
-        <div class="table-responsive small" id="venda-1">
+        <div class="table-responsive small" id="venda-<?php echo $dadoVenda['protocolo']?>">
           <table class="table table-striped table-sm">
             <thead>
               <tr>
@@ -203,21 +203,25 @@
                 <th scope="col">Cliente</th>
                 <th scope="col">Valor</th>
                 <th scope="col">Imposto</th>
+                <th scope="col">Valor Total</th>
                 <th scope="col">Dados da Venda</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Carlos</td>
-                <td>R$ 50,00</td>
-                <td>R$ 49,99</td>
-                <td>
-                  <a class="btn btn-primary venda-listar" id="1-venda-listar" href="/venda/dados-venda/?id_venda=1" role="button">
-                    <i class="bi bi-grid-3x3-gap-fill"></i>
-                  </a>
-                </td>
-              </tr>
+              <?php foreach ($dadosVenda as $chaveDado => $dadoVenda) { ?>
+                <tr>
+                  <td><?php echo $dadoVenda['protocolo']; ?></td>
+                  <td><?php echo $dadoVenda['cliente']; ?></td>
+                  <td><?php echo $dadoVenda['valor']; ?></td>
+                  <td><?php echo $dadoVenda['imposto']; ?></td>
+                  <td><?php echo number_format($dadoVenda['valor'] + $dadoVenda['imposto'], 2); ?></td>
+                  <td>
+                    <a class="btn btn-primary venda-listar" id="<?php echo $dadoVenda['protocolo']?>-venda-listar" href="/venda/dados-venda/?id_venda=<?php echo $dadoVenda['protocolo']?>" role="button">
+                      <i class="bi bi-grid-3x3-gap-fill"></i>
+                    </a>
+                  </td>
+                </tr>
+              <?php } ?>
             </tbody>
           </table>
         </div>

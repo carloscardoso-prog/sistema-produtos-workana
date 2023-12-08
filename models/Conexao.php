@@ -1,19 +1,23 @@
 <?php
 
-define("DB_HOST", "DESKTOP-2I2E65D\\MSSQLSERVER01");
-define("DB_USER", "");
-define("DB_PASSWORD", "");
-define("DB_NAME", "master");
-define("DB_DRIVER", "sqlsrv");
-// Changing to POSTGRESQL in which its easier to maintain
+define("DB_HOST", "localhost");
+define("DB_USER", "postgres");
+define("DB_PASSWORD", "postgres");
+define("DB_NAME", "postgres");
+define("DB_DRIVER", "pgsql");
+
 class Conexao
 {
-    private static $connection;
+    public static $connection;
+
+    public function __construct()
+    {
+    }
 
     public static function getConnection()
     {
-        $pdoConfig = DB_DRIVER . ":" . "Server=" . DB_HOST . ";";
-        $pdoConfig .= "Database=" . DB_NAME . ";";
+        $pdoConfig = DB_DRIVER . ":" . "host=" . DB_HOST . ";";
+        $pdoConfig .= "dbname=" . DB_NAME . ";";
 
         try {
             if (!isset(self::$connection)) {
@@ -21,8 +25,7 @@ class Conexao
                 self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
         } catch (PDOException $e) {
-            $mensagem = "DRIVERS DISPONÍVEIS: " . implode(",", PDO::getAvailableDrivers());
-            $mensagem .= "\nErro: " . $e->getMessage();
+            $mensagem = "Erro ao conectar ao PostgreSQL: " . $e->getMessage();
             throw new Exception($mensagem);
         }
 

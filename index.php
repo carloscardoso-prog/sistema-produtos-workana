@@ -14,9 +14,15 @@ $requestUri = explode('?', $requestUri)[0];
 $uriSegments = explode('/', $requestUri);
 
 // Obtain the controller and method names from the URI segments
-$controllerName = isset($uriSegments[1]) ? ucfirst($uriSegments[1]) . 'Controller' : 'HomeController';
-$methodName = isset($uriSegments[2]) ? $uriSegments[2] : 'index';
-$methodName = str_contains($uriSegments[2], 'dados') !== false ? "listarDadoUnico" : $methodName; 
+
+$controllerName = !empty($uriSegments[1]) ? ucfirst($uriSegments[1]) . 'Controller' : 'Controller';
+$methodName = 'index';
+
+if (!empty($uriSegments[2])) {
+    $methodName = str_contains($uriSegments[2], 'dados') !== false ? "listarDadoUnico" : $uriSegments[2];
+}
+
+$methodName = str_replace("-", "_", $methodName);
 
 // Path to the controllers
 $controllerPath = __DIR__ . '/controllers/' . $controllerName . '.php';

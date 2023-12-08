@@ -1,8 +1,3 @@
-<?php
-$valorImposto = 0;
-$valorTotal = 0;
-?>
-<!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 
 <head>
@@ -112,69 +107,75 @@ $valorTotal = 0;
 
     <main>
       <div class="py-5 text-center">
-        <h2>Listagem de Venda</h2>
+        <h2>Cadastro de Venda</h2>
+        <p class="lead">Cadastre a venda registrando os dados abaixo.</p>
       </div>
 
-      <div class="row g-5">
-        <div class="col-md-5 col-lg-4 order-md-last">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-primary">Produtos Vendidos:</span>
-          </h4>
-          <ul class="list-group mb-3">
-            <?php foreach ($dadosVenda as $chaveDado => $dadoVenda) {
-              $valorImposto += number_format($dadoVenda['produto_imposto'] * $dadoVenda['quantidade_produto'], 2);
-              $valorTotal += number_format($dadoVenda['produto_valor'] * $dadoVenda['quantidade_produto'], 2);
-            ?>
+      <form class="needs-validation" id="venda" novalidate>
+        <input type="hidden" class="form-control" id="usuario" name="usuario_id" value="NomeUsuario" required>
+        <div class="row g-5">
+          <div class="col-md-5 col-lg-4 order-md-last produtos-lista">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-primary">Produtos:</span>
+            </h4>
+            <ul class="list-group mb-3">
               <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                  <h6 class="my-0"><?php echo $dadoVenda['produto_nome']; ?></h6>
-                  <span>QTD: <?php echo $dadoVenda['quantidade_produto'] ?> * <?php echo $dadoVenda['produto_valor'] ?> = <?php echo number_format($dadoVenda['produto_valor'] * $dadoVenda['quantidade_produto'], 2) ?></span>
+                <div id="produto-bacana">
+                  <h6 class="my-0">Produto Bacana</h6>
+                  <a class="btn btn-primary btn-sm adiciona-produto" id="adiciona-produto-bacana"><i>+1</i></a>
+                  <a class="btn btn-primary btn-sm remove-produto" id="remove-produto-bacana"><i>-1</i></a>
+                  <span id="exibe-quantidade-produto-bacana">1</span>
                 </div>
-                <span class="text-body-secondary">R$ <?php echo number_format($dadoVenda['produto_valor'], 2); ?></span>
+                <input type="hidden" name="produto[produto-bacana]" class="valor-form-produto-bacana" id="quantidade-produto-bacana" value="1">
+                <span class="text-body-secondary produto-bacana" id="produto-bacana-valor-multiplicado">R$ 12.00</span>
+                <span class="d-none text-body-secondary" id="produto-bacana-valor-unico">12.00</span>
               </li>
-            <?php }
-            $valorTotal += $valorImposto; ?>
-            <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-              <div class="text-success">
-                <h6 class="my-0">Valor Imposto</h6>
-              </div>
-              <span class="text-success">+R$ <?php echo number_format($valorImposto, 2); ?></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total:</span>
-              <strong>R$ <?php echo number_format($valorTotal, 2) ?></strong>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-7 col-lg-8">
-          <h4 class="mb-3">Dados da venda:</h4>
-          <div class="row g-3">
-            <div class="col-sm-12">
-              <label for="firstName" class="form-label">Nome completo do cliente:</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="<?php echo $dadosVenda[0]['cliente_nome']; ?>" disabled>
-              <div class="invalid-feedback">
-                Valid first name is required.
-              </div>
-            </div>
+              <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+                <div class="text-success">
+                  <h6 class="my-0">Valor Imposto</h6>
+                </div>
+                <span class="text-success" id="imposto">+R$ 0,00</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total:</span>
+                <strong id="valor-final">R$ 20,00</strong>
+              </li>
+            </ul>
 
-            <div class="col-12">
-              <label for="username" class="form-label">Vendedor:</label>
-              <div class="input-group has-validation">
-                <input type="text" disabled class="form-control" id="username" value="<?php echo $dadosVenda[0]['usuario']; ?>" required>
-              </div>
-            </div>
-
-            <hr class="my-4">
           </div>
-        </div>
+          <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Dados da venda:</h4>
+            <div class="row g-3">
+              <div class="col-sm-12">
+                <label for="firstName" class="form-label">Nome completo do cliente:</label>
+                <input type="text" class="form-control" id="cliente-nome" name="cliente_nome" value="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="country" class="form-label">Adicionar produto a lista:</label>
+                <select class="form-select" id="produto">
+                  <option value="">Selecionar...</option>
+                  <option>Produto</option>
+                </select>
+              </div>
+
+              <hr class="my-4">
+
+              <button class="w-100 btn btn-primary btn-lg" form="venda" type="submit">Cadastrar venda</button>
+            </div>
+          </div>
+      </form>
     </main>
 
   </div>
 
   <script src="../../assets/js/jquery.js"></script>
   <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="index.js"></script>
 
+  <script src="../../assets/js/venda.js"></script>
 </body>
 
 </html>

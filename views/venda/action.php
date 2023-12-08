@@ -1,47 +1,23 @@
 <?php
 
-require_once  __DIR__ . '/../controller/ProdutoController.php';
-require_once  __DIR__ . '/../controller/VendaController.php';
+require_once __DIR__ . "/../../controllers/VendaController.php";
+require_once __DIR__ . "/../../controllers/ProdutoController.php";
 
 iniciaFluxoCodigo();
 function iniciaFluxoCodigo()
 {
     if (isset($_POST['acao'])) {
-        $idObjeto = "";
-        $dadosForm = "";
-
-        if (isset($_POST['dados']['idObjeto'])) {
-            $idObjeto = $_POST['dados']['idObjeto'];
-        }
-
-        if (isset($_POST['dados']['formData'])) {
-            $dadosForm = $_POST['dados']['formData'];
-        }
-
-        // if (isset($_POST[])) {
-        // }
-
-        $arquivo = $_POST['dados']['arquivo'];
-        $funcao = $_POST['dados']['funcao'];
-
-        $class = ucfirst($arquivo) . 'Controller';
 
         switch ($_POST['acao']) {
-            case 'listar':
-                echo json_encode($class::$funcao(['id_objeto' => $idObjeto]));
-                break;
-            case 'excluir':
-
-                break;
-            case 'inserir':
-                echo json_encode($class::$funcao(['dadosForm' => $dadosForm]));
-                break;
-            case 'atualizar':
-
-                break;
-            case 'append-arquivo':
-                // '/../view/form/produto-lista.php'
-                require_once  __DIR__ . $_POST['dados']['rota'];
+            case 'busca-dados-produto':
+                $dadosProduto = ProdutoController::buscar([
+                    'select' => 'PRODUTO.produto_nome AS Produto, PRODUTO_TIPO.produto_imposto AS Imposto',
+                    'from' => 'PRODUTO',
+                    'joins' => 'INNER JOIN PRODUTO_TIPO ON PRODUTO_TIPO.id = PRODUTO.produto_tipo_id',
+                    'where' => 'PRODUTO.produto_nome = ' . "'". $_POST['dados']['nomeProduto'] . "'"
+                ]);
+                
+                return $dadosProduto;
                 break;
             default:
                 break;

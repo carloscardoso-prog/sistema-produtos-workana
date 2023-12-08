@@ -1,3 +1,9 @@
+<?php
+
+echo '<pre>';
+print_r($produtoDados);
+echo '</pre>';
+?>
 <html lang="en" data-bs-theme="auto">
 
 <head>
@@ -156,9 +162,11 @@
 
               <div class="col-md-12">
                 <label for="country" class="form-label">Adicionar produto a lista:</label>
-                <select class="form-select" id="produto">
-                  <option value="">Selecionar...</option>
-                  <option>Produto</option>
+                <select class="form-select" id="produto-adicionar-select">
+                  <option selected>Selecionar...</option>
+                  <?php foreach ($produtoDados as $chaveDado => $produtoDado) { ?>
+                    <option value="<?php echo $produtoDado['produto']; ?>"><?php echo $produtoDado['produto']; ?></option>
+                  <?php } ?>
                 </select>
               </div>
 
@@ -175,7 +183,7 @@
   <script src="../../assets/js/jquery.js"></script>
   <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="../../assets/js/venda.js"></script>
+  <script src="../../views/venda/index.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Conexao.php';
-class Venda extends Conexao
+class Produto extends Conexao
 {
     public static function buscar(array $data)
     {
