@@ -110,25 +110,27 @@
       <h2>Sistema de Vendas</h2>
       <p class="lead">Seja bem vindo.</p>
     </div>
-    <form id="login">
+    <form id="usuario-logar">
       <p class="lead">Digite seus dados:</p>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="text" name="usuario[usuario][login]" class="form-control" id="login">
         <label for="floatingInput">Usuário:</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="password" name="usuario[usuario][password]" class="form-control" id="password">
         <label for="floatingPassword">Senha:</label>
       </div>
 
-      <input class="btn btn-primary w-100 py-2" type="submit" id="loginSubmit" form="login" value="Entrar">
+      <button class="btn btn-primary w-100 py-2" type="submit" form="usuario-logar">Entrar</button>
+      <a href="/usuario/usuario-cadastrar">Criar novo usuário</a>
     </form>
   </main>
 
   <script src="../assets/js/jquery.js"></script>
   <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
 
+  <script src="../../views/usuario/index.js"></script>
 </body>
 
 </html>

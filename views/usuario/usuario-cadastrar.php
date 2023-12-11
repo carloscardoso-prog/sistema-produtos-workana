@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en" data-bs-theme="auto">
 
 <head>
@@ -12,8 +11,6 @@
   <title>Checkout example · Bootstrap v5.3</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
-
-
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
@@ -100,7 +97,7 @@
 
 
   <!-- Custom styles for this template -->
-  <link href="../../assets/css/produto.css" rel="stylesheet">
+  <link href="../../assets/css/login.css" rel="stylesheet">
 </head>
 
 <body class="bg-body-tertiary">
@@ -110,45 +107,45 @@
 
     <main>
       <div class="py-5 text-center">
-        <h2>Cadastro de Produto</h2>
-        <p class="lead">Cadastre o produto registrando os dados abaixo.</p>
+        <h2>Cadastro de Usuário</h2>
+        <p class="lead">Cadastre o usuário registrando os dados abaixo.</p>
       </div>
 
-      <div class="row g-5">
-        <div class="col-md-12 col-lg-12">
-          <h4 class="mb-3">Dados do Produto:</h4>
-          <form class="needs-validation" novalidate>
+      <form class="needs-validation" id="usuario-cadastrar">
+        <div class="row g-5">
+          <div class="col-md-12 col-lg-12">
+            <h4 class="mb-3">Dados do usuário:</h4>
             <div class="row g-3">
-              <div class="col-md-6">
-                <label for="firstName" class="form-label">Nome do produto:</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <div class="col-sm-12">
+                <label for="login" class="form-label">Nome do usuário:</label>
+                <input type="text" class="form-control" id="login" name="usuario[usuario][login]" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
               </div>
 
-              <div class="col-md-6">
-                <label for="country" class="form-label">Tipo do produto:</label>
-                <select class="form-select" id="country" required>
-                  <option value="">Selecionar...</option>
-                  <option>Placa de Vídeo</option>
-                </select>
+              <div class="col-sm-12">
+                <label for="usuario" class="form-label">Senha do usuário:</label>
+                <input type="password" class="form-control" id="password" name="usuario[usuario][password]" required>
                 <div class="invalid-feedback">
-                  Favor selecionar um produto válido.
+                  Valid first name is required.
                 </div>
               </div>
 
               <hr class="my-4">
 
-              <button class="w-100 btn btn-primary btn-lg" type="submit">Cadastrar produto</button>
-          </form>
-        </div>
-      </div>
+              <button class="w-100 btn btn-primary btn-lg" form="usuario-cadastrar" type="submit">Cadastrar usuário</button>
+            </div>
+          </div>
+      </form>
     </main>
 
   </div>
-  <script src="../assets/js/jquery.js"></script>
 
+  <script src="../../assets/js/jquery.js"></script>
   <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="../../assets/js/produto.js"></script>
+  <script src="../../views/usuario/index.js"></script>
 </body>
 
 </html>

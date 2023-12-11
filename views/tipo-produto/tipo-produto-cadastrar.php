@@ -116,31 +116,31 @@
 
       <div class="row g-5">
         <div class="col-md-12 col-lg-12">
-          <h4 class="mb-3">Dados do Produto:</h4>
-          <form id="tipo-produto-form">
+          <h4 class="mb-3">Dados do Tipo de Produto:</h4>
+          <form class="needs-validation" id="tipo-produto-form">
             <div class="row g-3">
               <div class="col-md-4">
-                <label for="firstName" class="form-label">Tipo do produto:</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <label for="tipo_produto" class="form-label">Tipo do produto:</label>
+                <input type="text" class="form-control" name="tipo_produto[tipo_produto][tipo_nome]" id="tipo_produto" required>
               </div>
 
               <div class="col-md-4">
-                <label for="username" class="form-label">Valor do produto (Sem Imposto):</label>
+                <label for="valor_produto" class="form-label">Valor do produto (Sem Imposto):</label>
                 <div class="input-group has-validation">
-                  <input type="number" class="form-control" id="username" required>
+                  <input type="number" class="form-control"  name="tipo_produto[tipo_produto][produto_valor]" id="valor_produto" required>
                 </div>
               </div>
 
               <div class="col-md-4">
-                <label for="country" class="form-label">Valor do Imposto:</label>
+                <label for="imposto_produto" class="form-label">Valor do Imposto:</label>
                 <div class="input-group has-validation">
-                  <input type="number" class="form-control" id="username" required>
+                  <input type="number" class="form-control"  name="tipo_produto[tipo_produto][produto_imposto]" id="imposto_produto" required>
                 </div>
               </div>
 
               <hr class="my-4">
 
-              <input class="w-100 btn btn-primary btn-lg" type="button" form="tipo-produto-form" value="Cadastrar tipo de produto">
+              <button class="w-100 btn btn-primary btn-lg" type="submit" form="tipo-produto-form" value="Cadastrar tipo de produto">Cadastrar tipo de produto</button>
           </form>
         </div>
       </div>
@@ -148,10 +148,11 @@
 
   </div>
 
-  <script src="../assets/js/jquery.js"></script>
+
+  <script src="../../assets/js/jquery.js"></script>
   <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="../../assets/js/tipo-produto.js"></script>
+  <script src="../../views/tipo-produto/index.js"></script>
 </body>
 
 </html>

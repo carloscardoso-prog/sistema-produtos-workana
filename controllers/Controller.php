@@ -36,4 +36,27 @@ class Controller
         }
         return $return;
     }
+
+    public static function reorganizarArrayName(array $data)
+    {
+        $retorno = [];
+
+        foreach ($data['dados_filtrar'] as $chave => $valor) {
+            $posicao = strpos($chave, '][');
+            if ($posicao !== false) {
+                $index = substr($chave, 0, $posicao);
+                $campo = substr($chave, $posicao + 2);
+
+                $campo = rtrim($campo, ']');
+
+                if (!isset($retorno[$index])) {
+                    $retorno[$index] = [];
+                }
+
+                $retorno[$index][$campo] = $valor;
+            }
+        }
+
+        return ['dados_filtrar' => $retorno];
+    }
 }

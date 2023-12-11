@@ -97,7 +97,7 @@
 
 
   <!-- Custom styles for this template -->
-  <link href="../../assets/css/venda.css" rel="stylesheet">
+  <link href="../../assets/css/produto.css" rel="stylesheet">
 </head>
 
 <body class="bg-body-tertiary">
@@ -107,64 +107,38 @@
 
     <main>
       <div class="py-5 text-center">
-        <h2>Cadastro de Venda</h2>
-        <p class="lead">Cadastre a venda registrando os dados abaixo.</p>
+        <h2>Cadastro de Produto</h2>
+        <p class="lead">Cadastre o produto registrando os dados abaixo.</p>
       </div>
 
-      <form class="needs-validation" id="venda" novalidate>
-        <input type="hidden" class="form-control" id="usuario" name="usuario_id" value="NomeUsuario" required>
+      <form class="needs-validation" id="produto">
         <div class="row g-5">
-          <div class="col-md-5 col-lg-4 order-md-last produtos-lista">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-              <span class="text-primary">Produtos:</span>
-            </h4>
-            <ul class="list-group mb-3">
-              <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div id="produto-bacana">
-                  <h6 class="my-0">Produto Bacana</h6>
-                  <a class="btn btn-primary btn-sm adiciona-produto" id="adiciona-produto-bacana"><i>+1</i></a>
-                  <a class="btn btn-primary btn-sm remove-produto" id="remove-produto-bacana"><i>-1</i></a>
-                  <span id="exibe-quantidade-produto-bacana">1</span>
-                </div>
-                <input type="hidden" name="produto[produto-bacana]" class="valor-form-produto-bacana" id="quantidade-produto-bacana" value="1">
-                <span class="text-body-secondary produto-bacana" id="produto-bacana-valor-multiplicado">R$ 12.00</span>
-                <span class="d-none text-body-secondary" id="produto-bacana-valor-unico">12.00</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-                <div class="text-success">
-                  <h6 class="my-0">Valor Imposto</h6>
-                </div>
-                <span class="text-success" id="imposto">+R$ 0,00</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between">
-                <span>Total:</span>
-                <strong id="valor-final">R$ 20,00</strong>
-              </li>
-            </ul>
-
-          </div>
-          <div class="col-md-7 col-lg-8">
-            <h4 class="mb-3">Dados da venda:</h4>
+          <div class="col-md-12 col-lg-12">
+            <h4 class="mb-3">Dados do produto:</h4>
             <div class="row g-3">
               <div class="col-sm-12">
-                <label for="firstName" class="form-label">Nome completo do cliente:</label>
-                <input type="text" class="form-control" id="cliente-nome" name="cliente_nome" value="" required>
+                <label for="produto_nome" class="form-label">Nome do produto:</label>
+                <input type="text" class="form-control" id="produto_nome" name="produto[produto][produto_nome]" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
 
               <div class="col-md-12">
-                <label for="country" class="form-label">Adicionar produto a lista:</label>
-                <select class="form-select" id="produto">
+                <label for="country" class="form-label">Selecione o tipo de produto:</label>
+                <select class="form-select" id="tipo_produto" name="produto[produto][tipo_produto]" required>
                   <option value="">Selecionar...</option>
-                  <option>Produto</option>
+                  <?php if (!empty($tipoProdutos)) {
+                    foreach ($tipoProdutos as $chaveTipoProduto => $tipoProdutoUnico) { ?>
+                      <option value="<?php echo $tipoProdutoUnico['id']; ?>"><?php echo $tipoProdutoUnico['tipo_nome']; ?></option>
+                  <?php }
+                  } ?>
                 </select>
               </div>
 
               <hr class="my-4">
 
-              <button class="w-100 btn btn-primary btn-lg" form="venda" type="submit">Cadastrar venda</button>
+              <button class="w-100 btn btn-primary btn-lg" form="produto" type="submit">Cadastrar produto</button>
             </div>
           </div>
       </form>
@@ -175,7 +149,7 @@
   <script src="../../assets/js/jquery.js"></script>
   <script src="../../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="../../assets/js/venda.js"></script>
+  <script src="../../views/produto/index.js"></script>
 </body>
 
 </html>

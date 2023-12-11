@@ -33,7 +33,7 @@ class Venda extends Conexao
         $resultadoQuery = "";
 
         if (!empty($dadosQuery)) {
-            $resultadoQuery = self::executarQuery(['query' => "INSERT INTO " . $dadosQuery['insert'] . $dadosQuery['columns'] . " VALUES " . $dadosQuery['values'] . ";"]);
+            $resultadoQuery = self::executarQuery(['query' => "INSERT INTO " . $dadosQuery['insert'] . $dadosQuery['columns'] . " VALUES " . $dadosQuery['values'] . " RETURNING id" . ";"]);
         }
 
         return $resultadoQuery;

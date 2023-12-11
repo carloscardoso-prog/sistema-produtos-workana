@@ -5,7 +5,9 @@ class UsuarioController extends Usuario
 {
     public function index()
     {
+        session_destroy();
         require_once __DIR__ . '/../views/index.php';
+        exit();
     }
 
     public static function buscarUsuarioIdPorUsuario(array $data)
@@ -19,7 +21,7 @@ class UsuarioController extends Usuario
                 'where' => 'USUARIO.usuario = ' . "'" . $data['usuario'] . "'"
             ]);
 
-            if(!empty($retorno)){
+            if (!empty($retorno)) {
                 $retorno = $retorno[0];
             }
         }
@@ -31,19 +33,30 @@ class UsuarioController extends Usuario
     {
         if (!empty($data)) {
 
-            print_r($data);
-            parse_str($data['dadosForm'], $arrayResultado);
-            die;
-            foreach ($data['dadosForm'] as $chaveDado => $dadoInserir) {
-            }
+            $dadosUsuarioFiltrados = (self::reorganizaDadosCadastroUsuario(['dadosForm' => $data['dados_usuario']]));
 
-            $vendaCadastro = self::inserir([
-                'insert' => 'VENDA',
-                'columns' => 'cliente_nome, venda_data, usuario_id'
-                // 'values' =>
+            $usuarioExistente = self::buscar([
+                'select' => 'USUARIO.id',
+                'from' => 'USUARIO',
+                'where' => 'USUARIO.usuario = ' . "'" . $dadosUsuarioFiltrados['login'] . "'"
             ]);
+
+            if (empty($usuarioExistente)) {
+                $usuarioCadastro = self::inserir([
+                    'insert' => 'USUARIO',
+                    'columns' => '(usuario, senha)',
+                    'values' => "('" . $dadosUsuarioFiltrados["login"] . "', '" . password_hash($dadosUsuarioFiltrados['password'], PASSWORD_DEFAULT) . "')"
+                ]);
+
+                echo json_encode($usuarioCadastro);
+                exit();
+            } else {
+                echo json_encode('ERRO: USER EXISTENTE');
+                exit();
+            }
         } else {
-            require_once __DIR__ . '/../views/venda/venda-cadastrar.php';
+            require_once __DIR__ . '/../views/usuario/usuario-cadastrar.php';
+            exit();
         }
     }
 
@@ -51,19 +64,49 @@ class UsuarioController extends Usuario
     {
         if (!empty($data)) {
 
-            print_r($data);
-            parse_str($data['dadosForm'], $arrayResultado);
-            die;
-            foreach ($data['dadosForm'] as $chaveDado => $dadoInserir) {
-            }
+            $dadosUsuarioFiltrados = (self::reorganizaDadosCadastroUsuario(['dadosForm' => $data['dados_usuario']]));
 
-            $vendaCadastro = self::inserir([
-                'insert' => 'VENDA',
-                'columns' => 'cliente_nome, venda_data, usuario_id'
-                // 'values' =>
+            $usuarioDados = self::buscar([
+                'select' => 'USUARIO.id, USUARIO.usuario, USUARIO.senha',
+                'from' => 'USUARIO',
+                'where' => 'USUARIO.usuario = ' . "'" . $dadosUsuarioFiltrados['login'] . "'"
             ]);
+
+            if (!empty($usuarioDados) && !empty($dadosUsuarioFiltrados)) {
+                if (password_verify($dadosUsuarioFiltrados['password'], $usuarioDados[0]['senha'])) {
+                    session_start();
+                    $_SESSION["usuario"] = $dadosUsuarioFiltrados['login'];
+
+                    echo json_encode($usuarioDados);
+                    exit();
+                }
+            }
+            
+            echo json_encode("ERRO: DADOS INCORRETOS");
+            exit();
         } else {
             require_once __DIR__ . '/../views/usuario/usuario-login.php';
+            exit();
         }
+    }
+
+    public static function reorganizaDadosCadastroUsuario(array $data)
+    {
+        $dadosInsert = [];
+
+        $postArray = $data['dadosForm']['dadosUsuario'];
+
+        foreach ($postArray as $item) {
+            $name = $item['name'];
+            $value = $item['value'];
+
+            if ($name === 'usuario[usuario][login]') {
+                $dadosInsert['login'] = $value;
+            } elseif ($name === 'usuario[usuario][password]') {
+                $dadosInsert['password'] = $value;
+            }
+        }
+
+        return $dadosInsert;
     }
 }

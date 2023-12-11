@@ -111,8 +111,7 @@
         <p class="lead">Cadastre a venda registrando os dados abaixo.</p>
       </div>
 
-      <form class="needs-validation" id="venda" novalidate>
-        <input type="hidden" class="form-control" id="usuario" name="usuario_id" value="usuario1" required>
+      <form class="needs-validation" id="venda">
         <input type="hidden" data-contador="0" id="contador">
         <div class="row g-5">
           <div class="col-md-5 col-lg-4 order-md-last produtos-lista">
@@ -150,9 +149,12 @@
                 <label for="country" class="form-label">Adicionar produto a lista:</label>
                 <select class="form-select" id="produto-adicionar-select">
                   <option selected>Selecionar...</option>
-                  <?php foreach ($produtoDados as $chaveDado => $produtoDado) { ?>
-                    <option value="<?php echo $produtoDado['produto']; ?>"><?php echo $produtoDado['produto']; ?></option>
-                  <?php } ?>
+                  <?php
+                  if (!empty($produtoDados)) {
+                    foreach ($produtoDados as $chaveDado => $produtoDado) { ?>
+                      <option value="<?php echo $produtoDado['produto']; ?>"><?php echo $produtoDado['produto']; ?></option>
+                  <?php }
+                  } ?>
                 </select>
               </div>
 
