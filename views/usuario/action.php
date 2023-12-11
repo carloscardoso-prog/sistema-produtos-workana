@@ -14,6 +14,9 @@ function iniciaFluxoCodigo()
             case 'login-usuario':
                 UsuarioController::usuario_login(['dados_usuario' => $_POST['dados']]);
                 break;
+            case 'deslogar-usuario':
+                UsuarioController::usuarioDeslogar([]);
+                break;
             default:
                 break;
         }

@@ -33,7 +33,7 @@ $(document).ready(function () {
                 if (resultado.includes("ERRO")) {
                     alert(resultado);
                 } else {
-                    window.location.href = "../../";
+                    window.location.href = "/../../index.php";
                 }
             } else {
                 alert("ERRO! EXISTEM CAMPOS VAZIOS NA SOLITAÇÃO.");

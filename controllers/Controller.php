@@ -3,7 +3,7 @@ require_once __DIR__ . '/../models/Venda.php';
 
 class Controller
 {
-    public function index()
+    public static function index()
     {
         $dadosVenda = [];
 

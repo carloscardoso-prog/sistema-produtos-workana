@@ -3,13 +3,6 @@
 require_once  __DIR__ . '/../models/Usuario.php';
 class UsuarioController extends Usuario
 {
-    public function index()
-    {
-        session_destroy();
-        require_once __DIR__ . '/../views/index.php';
-        exit();
-    }
-
     public static function buscarUsuarioIdPorUsuario(array $data)
     {
         $retorno = [];
@@ -76,12 +69,13 @@ class UsuarioController extends Usuario
                 if (password_verify($dadosUsuarioFiltrados['password'], $usuarioDados[0]['senha'])) {
                     session_start();
                     $_SESSION["usuario"] = $dadosUsuarioFiltrados['login'];
-
+                    $_SESSION["usuarioLoginRecente"] = true;
+                    
                     echo json_encode($usuarioDados);
                     exit();
                 }
             }
-            
+
             echo json_encode("ERRO: DADOS INCORRETOS");
             exit();
         } else {
@@ -108,5 +102,15 @@ class UsuarioController extends Usuario
         }
 
         return $dadosInsert;
+    }
+
+    public static function usuarioDeslogar(array $data)
+    {
+        session_start();
+        if (!empty($_SESSION)) {
+            session_unset();
+            session_destroy();
+        }
+        echo json_encode("Sessão finalizada");
     }
 }
