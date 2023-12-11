@@ -150,7 +150,7 @@
                 <select class="form-select" id="produto-adicionar-select">
                   <option selected>Selecionar...</option>
                   <?php
-                  if (!empty($produtoDados)) {
+                  if (!isset($produtoDados)) {
                     foreach ($produtoDados as $chaveDado => $produtoDado) { ?>
                       <option value="<?php echo $produtoDado['produto']; ?>"><?php echo $produtoDado['produto']; ?></option>
                   <?php }

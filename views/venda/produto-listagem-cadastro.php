@@ -1,4 +1,4 @@
-<?php if (!empty($dadosProduto) && !empty($contador)) { ?>
+<?php if (!isset($dadosProduto) && !isset($contador)) { ?>
     <li class="list-group-item d-flex justify-content-between lh-sm">
         <div id="produto-<?php echo $contador; ?>">
             <h6 class="my-0"><?php echo $dadosProduto[0]['produto']; ?></h6>

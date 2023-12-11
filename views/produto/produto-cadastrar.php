@@ -128,7 +128,7 @@
                 <label for="country" class="form-label">Selecione o tipo de produto:</label>
                 <select class="form-select" id="tipo_produto" name="produto[produto][tipo_produto]" required>
                   <option value="">Selecionar...</option>
-                  <?php if (!empty($tipoProdutos)) {
+                  <?php if (!isset($tipoProdutos)) {
                     foreach ($tipoProdutos as $chaveTipoProduto => $tipoProdutoUnico) { ?>
                       <option value="<?php echo $tipoProdutoUnico['id']; ?>"><?php echo $tipoProdutoUnico['tipo_nome']; ?></option>
                   <?php }

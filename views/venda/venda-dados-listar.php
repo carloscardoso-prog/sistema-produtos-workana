@@ -115,7 +115,7 @@ $valorTotal = 0;
         <h2>Listagem de Venda</h2>
       </div>
 
-      <?php if (!empty($dadosVenda)) { ?>
+      <?php if (!isset($dadosVenda)) { ?>
         <div class="row g-5">
           <div class="col-md-5 col-lg-4 order-md-last">
             <h4 class="d-flex justify-content-between align-items-center mb-3">

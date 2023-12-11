@@ -195,36 +195,38 @@
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
         <h2>Lista de Vendas</h2>
-        <div class="table-responsive small" id="venda-<?php echo $dadoVenda['protocolo']?>">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Protocolo</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Imposto</th>
-                <th scope="col">Valor Total</th>
-                <th scope="col">Dados da Venda</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($dadosVenda as $chaveDado => $dadoVenda) { ?>
+        <?php if (!isset($dadosVenda)) { ?>
+          <div class="table-responsive small" id="venda-<?php echo $dadoVenda['protocolo'] ?>">
+            <table class="table table-striped table-sm">
+              <thead>
                 <tr>
-                  <td><?php echo $dadoVenda['protocolo']; ?></td>
-                  <td><?php echo $dadoVenda['cliente']; ?></td>
-                  <td><?php echo $dadoVenda['valor']; ?></td>
-                  <td><?php echo $dadoVenda['imposto']; ?></td>
-                  <td><?php echo number_format($dadoVenda['valor'] + $dadoVenda['imposto'], 2); ?></td>
-                  <td>
-                    <a class="btn btn-primary venda-listar" id="<?php echo $dadoVenda['protocolo']?>-venda-listar" href="/venda/dados-venda/?id_venda=<?php echo $dadoVenda['protocolo']?>" role="button">
-                      <i class="bi bi-grid-3x3-gap-fill"></i>
-                    </a>
-                  </td>
+                  <th scope="col">Protocolo</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Imposto</th>
+                  <th scope="col">Valor Total</th>
+                  <th scope="col">Dados da Venda</th>
                 </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                <?php foreach ($dadosVenda as $chaveDado => $dadoVenda) { ?>
+                  <tr>
+                    <td><?php echo $dadoVenda['protocolo']; ?></td>
+                    <td><?php echo $dadoVenda['cliente']; ?></td>
+                    <td><?php echo $dadoVenda['valor']; ?></td>
+                    <td><?php echo $dadoVenda['imposto']; ?></td>
+                    <td><?php echo number_format($dadoVenda['valor'] + $dadoVenda['imposto'], 2); ?></td>
+                    <td>
+                      <a class="btn btn-primary venda-listar" id="<?php echo $dadoVenda['protocolo'] ?>-venda-listar" href="/venda/dados-venda/?id_venda=<?php echo $dadoVenda['protocolo'] ?>" role="button">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                      </a>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        <?php } ?>
       </main>
     </div>
   </div>
